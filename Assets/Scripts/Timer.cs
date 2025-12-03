@@ -6,21 +6,28 @@ public class Timer : MonoBehaviour
     [SerializeField] TextMeshProUGUI textoTimer;
     [SerializeField] float tempoRestante;
 
+    public bool acabou = false;
+
     void Update()
     {
-        if (tempoRestante > 0)
+        if (acabou == false)
         {
-            tempoRestante -= Time.deltaTime;
-        }
-        else
-        {
-            tempoRestante = 0;
+            if (tempoRestante > 0)
+            {
+                tempoRestante -= Time.deltaTime;
+            }
+            else
+            {
+                tempoRestante = 0;
+                acabou = true;
+
+                // PARA O JOGO SÓ QUANDO ACABAR
+                Time.timeScale = 0f;
+            }
         }
 
-        
+        // Cor do texto pode mudar normal
         textoTimer.color = Color.red;
-	//GameOver();
-	Time.timeScale = 0f;	
 
         int minutos = Mathf.FloorToInt(tempoRestante / 60);
         int segundos = Mathf.FloorToInt(tempoRestante % 60);

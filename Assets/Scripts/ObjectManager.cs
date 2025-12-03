@@ -3,31 +3,34 @@ using TMPro;
 
 public class ObjectManager : MonoBehaviour
 {
-    // Declara variável de referência para o texto de UI 
+    // Referência para o texto da UI
     public TextMeshProUGUI clickerCountText;
-    
-    // Declara variável para contagem de cliques
+
+    // Contador de cliques
     public int clickCount = 0;
 
-    // Declara variável de referência de posição (transform) para o ponto de spawn
+    // Ponto de spawn
     public Transform spawnPoint;
 
-    // Declara variável de referência para o objeto (spawnpoint) 
+    // Objeto que será instanciado
     public GameObject spawnObject;
 
-    // Método para clique no objeto principal
+    // Referência ao Timer
+    [SerializeField] private Timer meuTimer;
+
     void OnMouseDown()
     {
+        // Só permite clicar se o timer não acabou
+        if (meuTimer != null && meuTimer.acabou == false)
+        {
+            // Soma clique
+            clickCount++;
 
-        // Aumenta o valor da variável de contagem
-        clickCount++;
+            // Atualiza texto
+            clickerCountText.text = clickCount.ToString();
 
-        // Seta o valor atualizado da variável no texto da UI
-        clickerCountText.text = clickCount.ToString();
-
-        // Cria objetos (instâncias) ao clicar no objeto principal
-        Instantiate(spawnObject, spawnPoint.position, spawnPoint.rotation);
-              
+            // Instancia o objeto no ponto de spawn
+            Instantiate(spawnObject, spawnPoint.position, spawnPoint.rotation);
+        }
     }
-
 }
