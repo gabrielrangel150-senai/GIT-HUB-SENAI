@@ -21,12 +21,12 @@ public class Timer : MonoBehaviour
                 tempoRestante = 0;
                 acabou = true;
 
-                // PARA O JOGO SÓ QUANDO ACABAR
+                
                 Time.timeScale = 0f;
             }
         }
 
-        // Cor do texto pode mudar normal
+        
         textoTimer.color = Color.red;
 
         int minutos = Mathf.FloorToInt(tempoRestante / 60);
